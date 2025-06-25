@@ -32,6 +32,12 @@ def completar_tarefa(tarefas, indice_tarefa):
         print("Índice inválido. Tarefa não encontrada.")
     return
 
+def deletar_tarefas_completadas(tarefas):
+  for tarefa in tarefas:
+      if tarefa['completada']:
+        tarefas.remove(tarefa)
+  print(f"Tarefa '{tarefa['tarefa']}' deletada.")
+  return
 
 tarefas = []
 while True:
@@ -47,6 +53,9 @@ while True:
 
   if escolha == "1":
     nome_tarefa = input("Digite o nome da tarefa que deseja adicionar: ")
+    if not nome_tarefa.strip():
+      print("O nome da tarefa não pode ser vazio. Tarefa não adicionada.")
+      continue
     adicionar_tarefa(tarefas, nome_tarefa)
   elif escolha == "2":
     ver_tarefas(tarefas)
@@ -61,6 +70,9 @@ while True:
     # Solicita o índice da tarefa a ser completada
     indice_tarefa = int(input("Digite o número da tarefa que deseja completar: ")) - 1
     completar_tarefa(tarefas, indice_tarefa)
+  elif escolha == "5":
+    deletar_tarefas_completadas(tarefas)
+    ver_tarefas(tarefas)
   elif escolha == "6":
     break
 
